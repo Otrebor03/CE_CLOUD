@@ -1,0 +1,310 @@
+\documentclass[12pt,a4paper]{article}
+
+% ----------------------------------------
+% Paquetes básicos
+% ----------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{amsmath, amssymb}
+\usepackage{verbatim}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{url}
+\usepackage[gen]{eurosym}
+\usepackage{mathptmx}
+
+% ----------------------------------------
+% Definición de variables del documento
+% ----------------------------------------
+\newcommand{\DocTitle}{Plantilla de Informe Pericial de Análisis Forense Informático}
+\newcommand{\DocAuthor}{Roberto Ripoll Cones}
+\newcommand{\DocCenter}{CIPFP MISLATA}
+\newcommand{\DocCourse}{CE CETI}
+\newcommand{\DocSubject}{ANÁLISIS FORENSE INFORMÁTICO}
+\newcommand{\DocYear}{2025--2026}
+\newcommand{\DocDate}{\today}
+
+% ----------------------------------------
+% Configuración de márgenes
+% ----------------------------------------
+\geometry{ top=3cm, bottom=3cm, left=3cm, right=3cm }
+\def\UrlBreaks{\do\/\do-\do.\do_}
+
+% ----------------------------------------
+% Interlineado
+% ----------------------------------------
+\onehalfspacing
+
+% ----------------------------------------
+% Encabezado y pie de página
+% ----------------------------------------
+\pagestyle{fancy}
+\fancyhf{}
+
+\fancyhead[L]{\DocCenter}
+\fancyhead[C]{\parbox{0.5\textwidth}{\centering \textbf{\DocTitle}}}
+\fancyhead[R]{\DocCourse}
+
+\renewcommand{\headrule}{\vspace{6pt}\hrule\vspace{0pt}}
+
+\setlength{\headheight}{50pt}
+\setlength{\headsep}{20pt}
+
+\fancyfoot[L]{\DocDate}
+\fancyfoot[C]{\DocAuthor}
+\fancyfoot[R]{\thepage}
+
+% ----------------------------------------
+% Título
+% ----------------------------------------
+\title{\DocTitle}
+\author{\DocAuthor}
+\date{\DocDate}
+
+\begin{document}
+\sloppy
+
+% ----------------------------------------
+% Portada
+% ----------------------------------------
+\begin{titlepage}
+\centering
+{\scshape\LARGE \DocCenter \par}
+\vspace{0.5cm}
+{\scshape\Large \DocCourse \par}
+{\scshape\large \DocSubject \par}
+\vspace{2cm}
+{\Huge\bfseries \DocTitle \par}
+\vspace{2cm}
+{\large Autor: \DocAuthor \par}
+{\large Años: \DocYear \par}
+\vfill
+{\large \DocDate \par}
+\end{titlepage}
+
+% ----------------------------------------
+% Índice general
+% ----------------------------------------
+\tableofcontents
+\newpage
+
+% ----------------------------------------
+% Índice de figuras y tablas
+% ----------------------------------------
+\listoffigures
+\newpage
+
+\listoftables
+\newpage
+
+
+% ----------------------------------------
+% Glosario
+% ----------------------------------------
+\section*{Glosario}
+\addcontentsline{toc}{section}{Glosario}
+Definición de términos técnicos relevantes para el informe.
+\newpage
+
+% ----------------------------------------
+% Lista de Acrónimos
+% ----------------------------------------
+\section*{Lista de Acrónimos}
+\addcontentsline{toc}{section}{Lista de Acrónimos}
+Lista de abreviaturas usadas en el documento.
+\newpage
+
+% =======================================================
+% 1. Identificación
+% =======================================================
+\section{Identificación}
+\begin{itemize}
+    \item \textbf{Perito informático:} \rule{10cm}{0.2pt}
+    \item \textbf{Número de colegiado (si aplica):} \rule{7cm}{0.2pt}
+    \item \textbf{Entidad / Empresa:} \rule{10cm}{0.2pt}
+    \item \textbf{Número de caso o referencia:} \rule{7cm}{0.2pt}
+    \item \textbf{Fecha de inicio del análisis:} \rule{6cm}{0.2pt}
+\end{itemize}
+
+\newpage
+
+% =======================================================
+% 2. Estado legal del análisis
+% =======================================================
+\section{Estado legal del análisis}
+Indicar quién solicita el análisis (empresa, juzgado, particular), ámbito (penal, laboral, administrativo), y límites legales aplicables.
+
+\newpage
+
+% =======================================================
+% 3. Declaración de tachas
+% =======================================================
+\section{Declaración de tachas}
+El perito declara que no concurre ninguna causa de tacha o impedimento que pueda comprometer su objetividad.
+
+\newpage
+
+% =======================================================
+% 4. Juramento o promesa
+% =======================================================
+\section{Juramento o promesa}
+El perito manifiesta que actuará con objetividad, independencia y veracidad conforme a la ley.
+
+\newpage
+
+% =======================================================
+% 5. Resumen ejecutivo
+% =======================================================
+\section{Resumen ejecutivo}
+Breve resumen del caso, hallazgos y conclusiones clave.
+
+\newpage
+
+% =======================================================
+% 6. Introducción
+% =======================================================
+\section{Introducción}
+
+\subsection{Alcance}
+Describir el alcance del análisis realizado.
+
+\subsection{Objetivos}
+Enumerar los objetivos principales del análisis.
+
+\subsection{Metodología}
+Describir metodología siguiendo estándares (ISO 27037, NIST, etc.).
+
+\newpage
+
+% =======================================================
+% 7. Detalles del caso
+% =======================================================
+\section{Detalles del caso}
+
+\subsection{Información del sistema analizado}
+\begin{itemize}
+    \item Tipo de dispositivo:
+    \item Sistema operativo:
+    \item Versiones:
+    \item Identificadores de hardware:
+\end{itemize}
+
+\subsection{Evidencias recolectadas}
+Indicar tipo, hash, fecha, herramienta y procedimiento.
+
+\newpage
+
+% =======================================================
+% 8. Procedimientos de adquisición
+% =======================================================
+\section{Procedimientos de adquisición}
+Explicar paso a paso cómo se obtuvieron las evidencias, herramientas, parámetros, sellado, verificación de integridad, etc.
+
+\newpage
+
+% =======================================================
+% 9. Cronología del incidente
+% =======================================================
+\section{Cronología del incidente}
+Tabla con los eventos relevantes:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|p{10cm}|}
+\hline
+Fecha/Hora & Evento relevante \\ \hline
+ &  \\ \hline
+\end{tabular}
+\end{table}
+
+\newpage
+
+% =======================================================
+% 10. Análisis forense
+% =======================================================
+\section{Análisis forense}
+
+\subsection{Herramientas utilizadas}
+Listar herramientas y versiones.
+
+\subsection{Procedimientos aplicados}
+Descripción detallada del análisis realizado.
+
+\subsection{Resultados obtenidos}
+Presentación de los hallazgos principales.
+
+\newpage
+
+% =======================================================
+% 11. Limitaciones del análisis
+% =======================================================
+\section{Limitaciones del análisis}
+Descripción clara de cualquier limitación técnica o de alcance que pudiera afectar a las conclusiones.
+
+\newpage
+
+% =======================================================
+% 12. Conclusiones y recomendaciones
+% =======================================================
+\section{Conclusiones y recomendaciones}
+Conclusiones basadas estrictamente en los resultados.
+Recomendaciones de prevención y mitigación.
+
+\newpage
+
+% =======================================================
+% 13. Cadena de custodia
+% =======================================================
+\section{Cadena de custodia}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Fecha & Hora & Responsable & Acción realizada & Firma \\ \hline
+ &  &  &  &  \\ \hline
+\end{tabular}
+\end{table}
+
+\newpage
+
+% =======================================================
+% 14. Anexos
+% =======================================================
+\section{Anexos}
+\begin{itemize}
+    \item Capturas de pantalla
+    \item Logs relevantes
+    \item Hashes
+    \item Listados de comandos
+    \item Evidencias complementarias
+\end{itemize}
+
+\newpage
+
+% =======================================================
+% 15. Declaración de integridad
+% =======================================================
+\section{Declaración de integridad}
+El perito certifica que las evidencias no han sido alteradas durante el proceso de análisis.
+
+\vspace{2cm}
+
+\noindent\textbf{Firma del perito:} \\
+\rule{8cm}{0.3pt}
+
+\vspace{1cm}
+
+\noindent\textbf{Firma digital (si aplica):} \\
+\rule{8cm}{0.3pt}
+
+\end{document}

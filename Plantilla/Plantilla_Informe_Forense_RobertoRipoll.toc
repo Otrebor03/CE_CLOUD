@@ -1,0 +1,26 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{Glosario}{5}{Doc-Start}%
+\contentsline {section}{Lista de Acrónimos}{6}{Doc-Start}%
+\contentsline {section}{\numberline {1}Identificación}{7}{section.1}%
+\contentsline {section}{\numberline {2}Estado legal del análisis}{8}{section.2}%
+\contentsline {section}{\numberline {3}Declaración de tachas}{9}{section.3}%
+\contentsline {section}{\numberline {4}Juramento o promesa}{10}{section.4}%
+\contentsline {section}{\numberline {5}Resumen ejecutivo}{11}{section.5}%
+\contentsline {section}{\numberline {6}Introducción}{12}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Alcance}{12}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Objetivos}{12}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Metodología}{12}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Detalles del caso}{13}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Información del sistema analizado}{13}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Evidencias recolectadas}{13}{subsection.7.2}%
+\contentsline {section}{\numberline {8}Procedimientos de adquisición}{14}{section.8}%
+\contentsline {section}{\numberline {9}Cronología del incidente}{15}{section.9}%
+\contentsline {section}{\numberline {10}Análisis forense}{16}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Herramientas utilizadas}{16}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Procedimientos aplicados}{16}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}Resultados obtenidos}{16}{subsection.10.3}%
+\contentsline {section}{\numberline {11}Limitaciones del análisis}{17}{section.11}%
+\contentsline {section}{\numberline {12}Conclusiones y recomendaciones}{18}{section.12}%
+\contentsline {section}{\numberline {13}Cadena de custodia}{19}{section.13}%
+\contentsline {section}{\numberline {14}Anexos}{20}{section.14}%
+\contentsline {section}{\numberline {15}Declaración de integridad}{21}{section.15}%
