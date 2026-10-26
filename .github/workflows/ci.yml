@@ -1,0 +1,24 @@
+name: CI Validar y Testear
+
+on:
+  workflow_dispatch:
+
+jobs:
+  lint-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v7
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'          
+
+      - name: Instalar dependencias
+        working-directory: ./despliegue
+        run: npm ci
+
+      - name: Validar HTML (html-validate)
+        working-directory: ./despliegue
+        run: npx html-validate index.html
