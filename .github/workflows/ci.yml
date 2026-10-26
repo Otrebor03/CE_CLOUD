@@ -22,3 +22,7 @@ jobs:
       - name: Validar HTML (html-validate)
         working-directory: ./Despliegues_Servicios/Tema 1 - Introduccion/prac1cicd
         run: npx html-validate index.html
+      
+      - name: Validar CSS (css-validate)
+        working-directory: ./Despliegues_Servicios/Tema 1 - Introduccion/prac1cicd
+        run: npx css-validate css/style.css
