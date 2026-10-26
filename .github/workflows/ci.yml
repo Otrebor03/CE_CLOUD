@@ -8,12 +8,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout código
-        uses: actions/checkout@v7
+        uses: actions/checkout@v4
 
       - name: Configurar Node.js
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@v4
         with:
-          node-version: '24'          
+          node-version: '20'          
 
       - name: Instalar dependencias
         working-directory: ./Despliegues_Servicios/Tema 1 - Introduccion/prac1cicd
@@ -23,6 +23,6 @@ jobs:
         working-directory: ./Despliegues_Servicios/Tema 1 - Introduccion/prac1cicd
         run: npx html-validate index.html
       
-      - name: Validar CSS (css-validate)
+      - name: Validar CSS (w3c-validate-css)
         working-directory: ./Despliegues_Servicios/Tema 1 - Introduccion/prac1cicd
-        run: npx css-validate css/style.css
+        run: npx w3c-validate-css --target css/style.css
