@@ -1,8 +1,11 @@
 name: CI Validar y Testear
 
 on:
+  #Validacion manual
   # workflow_dispatch:
- push:
+ 
+  #Validacion automatica
+  push:
    branches:
      - main
 
@@ -26,6 +29,6 @@ jobs:
         working-directory: ./Despliegues_Servicios/Tema 1 - Introduccion/prac1cicd
         run: npx html-validate index.html
       
-      - name: Validar CSS (w3c-validate-css)
+      - name: Validar CSS (Stylelint)
         working-directory: ./Despliegues_Servicios/Tema 1 - Introduccion/prac1cicd
-        run: npx w3c-validate-css --target css/style.css
+        run: npx stylelint "css/**/*.css"
