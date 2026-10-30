@@ -45,7 +45,7 @@ def crear_subred(ec2, vpc_id):
         TagSpecifications=[
             {
                 'ResourceType': 'subnet',
-                'Tags': [{'Key': 'Name', 'Value': 'MiSubred-Boto3'}]
+                'Tags': [{'Key': 'Name', 'Value': 'Subred-RRC'}]
             }
         ]
     )
