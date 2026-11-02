@@ -1,7 +1,12 @@
 name: CD Deploy a GitHub Pages
 
 on:
-  workflow_dispatch:
+  workflow_run:
+    workflows: ["CI Validar y Testear"]
+    types:
+      - completed
+    branches:
+      - main
 
 permissions:
   contents: read
