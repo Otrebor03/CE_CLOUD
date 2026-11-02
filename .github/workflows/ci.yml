@@ -35,4 +35,5 @@ jobs:
       
       - name: Validar JavaScript (ESLint)
         working-directory: ./Despliegues_Servicios/Tema 1 - Introduccion/prac1cicd
-        run: npx eslint js/**/*.js
+        run: npm run lint
+
