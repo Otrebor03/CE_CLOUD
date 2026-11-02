@@ -32,3 +32,7 @@ jobs:
       - name: Validar CSS (Stylelint)
         working-directory: ./Despliegues_Servicios/Tema 1 - Introduccion/prac1cicd
         run: npx stylelint "css/**/*.css"
+      
+      - name: Validar JavaScript (ESLint)
+        working-directory: ./Despliegues_Servicios/Tema 1 - Introduccion/prac1cicd
+        run: npx eslint js/**/*.js
