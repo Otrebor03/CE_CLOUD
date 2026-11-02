@@ -1,13 +1,7 @@
 name: CI Validar y Testear
 
 on:
-  #Validacion manual
-  # workflow_dispatch:
- 
-  #Validacion automatica
-  push:
-   branches:
-     - main
+  workflow_dispatch:
 
 jobs:
   lint-and-validate:
@@ -22,18 +16,17 @@ jobs:
           node-version: '24'          
 
       - name: Instalar dependencias
-        working-directory: ./Despliegues_Servicios/Tema 1 - Introduccion/prac1cicd
+        working-directory: ./despliegue
         run: npm ci
 
       - name: Validar HTML (html-validate)
-        working-directory: ./Despliegues_Servicios/Tema 1 - Introduccion/prac1cicd
+        working-directory: ./despliegue
         run: npx html-validate index.html
-      
-      - name: Validar CSS (Stylelint)
-        working-directory: ./Despliegues_Servicios/Tema 1 - Introduccion/prac1cicd
+    
+      - name: Linting CSS (stylelint)
+        working-directory: ./despliegue
         run: npx stylelint "css/**/*.css"
-      
-      - name: Validar JavaScript (ESLint)
-        working-directory: ./Despliegues_Servicios/Tema 1 - Introduccion/prac1cicd
-        run: npm run lint
 
+      - name: Linting JavaScript (eslint)
+        working-directory: ./despliegue
+        run: npx eslint js/
