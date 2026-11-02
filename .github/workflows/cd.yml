@@ -24,7 +24,7 @@ jobs:
       - name: Subir archivos de la web
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './despliegue'
+          path: './Despliegues_Servicios/Tema 1 - Introduccion/Practica 1/Proyecto/despliegue'
 
       - name: Desplegar en GitHub Pages
         id: deploy
