@@ -1,13 +1,6 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 
-# ==========================================================
-# RETO UP4 - SEGUNDA VPC MEDIANTE AWS CLI
-# Región: us-east-1
-# Recursos: VPC + subred pública + IGW + rutas + SG + EC2
-# Compatible con Bash (Git Bash en Windows y AWS CloudShell).
-# ==========================================================
-
 export AWS_DEFAULT_REGION="${AWS_DEFAULT_REGION:-us-east-1}"
 export AWS_PAGER=""
 
@@ -56,10 +49,8 @@ printf '%s\n' "==================================================" \
     " Región: $REGION" \
     "=================================================="
 
-# ----------------------------------------------------------
-# 1. Comprobaciones iniciales
-# ----------------------------------------------------------
 
+# 1. Comprobaciones iniciales
 echo "[1/8] Comprobando herramientas y credenciales AWS..."
 
 command -v aws >/dev/null 2>&1 || fail "AWS CLI no está instalado o no está en PATH."
@@ -70,7 +61,7 @@ command -v base64 >/dev/null 2>&1 || fail "base64 no está disponible en este en
 aws sts get-caller-identity >/dev/null || fail "Credenciales AWS no válidas o caducadas."
 
 # Si no se proporciona MY_IP_CIDR, se detecta la IP desde el equipo
-# que ejecuta el script. En CloudShell será la IP de CloudShell.
+# que ejecuta el script 
 if [[ -z "${MY_IP_CIDR:-}" ]]; then
     MY_IP="$(curl -fsS --max-time 10 https://checkip.amazonaws.com | tr -d '[:space:]')" \
         || fail "No se ha podido detectar la IP pública. Define MY_IP_CIDR manualmente."
@@ -101,9 +92,9 @@ if [[ "$EXISTING_VPC" != "None" && -n "$EXISTING_VPC" ]]; then
     fail "Ya existe vpc-reto ($EXISTING_VPC). Limpia la ejecución anterior o usa una VPC limpia antes de volver a ejecutar el script."
 fi
 
-# ----------------------------------------------------------
+
 # 2. Obtener AMI de Amazon Linux 2023
-# ----------------------------------------------------------
+
 
 echo "[2/8] Buscando AMI de Amazon Linux 2023..."
 
@@ -127,9 +118,9 @@ fi
 [[ -n "$AMI_ID" && "$AMI_ID" != "None" ]] || fail "No se ha podido obtener una AMI de Amazon Linux 2023."
 printf 'AMI seleccionada: %s\n' "$AMI_ID"
 
-# ----------------------------------------------------------
+
 # 3. Crear VPC y activar DNS
-# ----------------------------------------------------------
+
 
 echo "[3/8] Creando VPC..."
 
@@ -151,9 +142,9 @@ aws ec2 modify-vpc-attribute \
 
 printf 'VPC creada: %s\n' "$VPC_ID"
 
-# ----------------------------------------------------------
+
 # 4. Crear subred pública
-# ----------------------------------------------------------
+
 
 echo "[4/8] Creando subred pública..."
 
@@ -173,9 +164,9 @@ aws ec2 modify-subnet-attribute \
 
 printf 'Subred creada: %s\n' "$SUBNET_ID"
 
-# ----------------------------------------------------------
+
 # 5. Crear Internet Gateway y tabla de rutas
-# ----------------------------------------------------------
+
 
 echo "[5/8] Configurando Internet Gateway y tabla de rutas..."
 
@@ -215,9 +206,9 @@ aws ec2 associate-route-table \
 
 printf 'Internet Gateway: %s\nTabla de rutas: %s\n' "$IGW_ID" "$RT_ID"
 
-# ----------------------------------------------------------
+
 # 6. Crear Security Group
-# ----------------------------------------------------------
+
 
 echo "[6/8] Creando Security Group..."
 
@@ -245,9 +236,9 @@ aws ec2 authorize-security-group-ingress \
 
 printf 'Security Group: %s\n' "$SG_ID"
 
-# ----------------------------------------------------------
+
 # 7. Preparar User Data
-# ----------------------------------------------------------
+
 
 echo "[7/8] Preparando User Data..."
 
@@ -288,9 +279,9 @@ USERDATA
 # aquí evitamos rutas temporales /tmp que AWS CLI para Windows no puede abrir.
 USER_DATA_B64="$(printf '%s' "$USER_DATA" | base64 | tr -d '\r\n')"
 
-# ----------------------------------------------------------
+
 # 8. Lanzar instancia EC2 y verificar la web
-# ----------------------------------------------------------
+
 
 echo "[8/8] Lanzando instancia EC2..."
 
@@ -350,7 +341,6 @@ printf '\n%s\n' "==================================================" \
     "Recursos:        $ENV_FILE" \
     "=================================================="
 
-# El User Data puede seguir ejecutándose después del status check.
 echo "Esperando a que Apache termine de instalarse y responda..."
 WEB_OK=0
 for ((ATTEMPT=1; ATTEMPT<=30; ATTEMPT++)); do
