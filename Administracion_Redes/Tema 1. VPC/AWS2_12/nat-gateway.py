@@ -1,21 +1,44 @@
 import boto3
 from botocore.exceptions import ClientError
+import urllib.request
 
 
-# -----------------------------------------------------------------------------
+def get_admin_cidr():
+    """Obtiene la IP publica del administrador y la devuelve en formato CIDR."""
+    print("\nObteniendo IP publica del administrador...")
+
+    try:
+        with urllib.request.urlopen(
+            "https://checkip.amazonaws.com",
+            timeout=10,
+        ) as response:
+            public_ip = response.read().decode("utf-8").strip()
+
+        admin_cidr = f"{public_ip}/32"
+
+        print(f"    IP publica detectada: {public_ip}")
+        print(f"    CIDR del administrador: {admin_cidr}")
+
+        return admin_cidr
+
+    except Exception as error:
+        raise ValueError(
+            f"No se pudo obtener la IP publica del administrador: {error}"
+        )
+
+
 # CONFIGURACION
-# -----------------------------------------------------------------------------
 
 REGION = "us-east-1"
 AVAILABILITY_ZONE = "us-east-1a"
 
-PROJECT_NAME = "VPC-RRC"
+PROJECT_NAME = "rrc-py"
 
 VPC_CIDR = "10.0.0.0/16"
 PUBLIC_SUBNET_CIDR = "10.0.1.0/24"
 PRIVATE_SUBNET_CIDR = "10.0.2.0/24"
 
-ADMIN_CIDR = "95.120.161.28/32"
+ADMIN_CIDR = get_admin_cidr()
 
 INSTANCE_TYPE = "t3.micro"
 KEY_NAME = "vockey"
@@ -32,10 +55,7 @@ TAGS = [
 ]
 
 
-# -----------------------------------------------------------------------------
 # VPC Y SUBNETS
-# -----------------------------------------------------------------------------
-
 
 def create_vpc(ec2):
     """Crea la VPC y habilita DNS."""
@@ -87,9 +107,9 @@ def create_subnet(ec2, vpc_id, cidr, name, public):
     return subnet_id
 
 
-# -----------------------------------------------------------------------------
+
 # INTERNET GATEWAY Y NAT GATEWAY
-# -----------------------------------------------------------------------------
+
 
 
 def create_internet_gateway(ec2, vpc_id):
@@ -145,10 +165,8 @@ def create_nat_gateway(ec2, public_subnet_id):
     return nat_id, allocation_id, nat_eip
 
 
-# -----------------------------------------------------------------------------
-# SECURITY GROUPS
-# -----------------------------------------------------------------------------
 
+# SECURITY GROUPS
 
 def create_security_groups(ec2, vpc_id):
     """Crea los grupos de seguridad para las EC2 publica y privada."""
@@ -215,10 +233,7 @@ def create_security_groups(ec2, vpc_id):
     return public_sg, private_sg
 
 
-# -----------------------------------------------------------------------------
 # TABLAS DE ENRUTAMIENTO
-# -----------------------------------------------------------------------------
-
 
 def create_route_table(ec2, vpc_id, subnet_id, name):
     """Crea una tabla de rutas y la asocia a una subnet."""
@@ -278,11 +293,7 @@ def configure_private_route(ec2, vpc_id, private_subnet_id, nat_id):
     print(f"    Ruta privada: 0.0.0.0/0 -> {nat_id}")
     return route_table_id
 
-
-# -----------------------------------------------------------------------------
 # EC2 Y PRUEBAS DE CONECTIVIDAD
-# -----------------------------------------------------------------------------
-
 
 def get_latest_ami(ssm):
     """Obtiene la AMI mas reciente de Amazon Linux 2023 para la region."""
@@ -393,8 +404,6 @@ def show_instance_information(ec2, public_instance_id, private_instance_id):
 
 def main():
     """Crea todos los recursos en el orden necesario."""
-    if ADMIN_CIDR == "CAMBIA_ESTO/32":
-        raise ValueError("Tienes que configurar ADMIN_CIDR con tu IP publica/32.")
 
     print("============================================")
     print(" DESPLIEGUE DE VPC CON SUBNET PUBLICA Y PRIVADA")
